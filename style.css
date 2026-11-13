@@ -1,401 +1,92 @@
-/* ===== Colors ===== */
+/* ===== Theme: navy and gold ===== */
 :root {
-  --text: #1a1a1a;
-  --muted: #666;
-  --link: #2563eb;
-  --bg: #ffffff;
-  --panel: #f6f7f9;
-  --line: #e5e5e5;
-  --tag-bg: #eef3ff;
-  --tag-text: #1e40af;
+  --text: #1f2430;
+  --muted: #5f6675;
+  --link: #1f3a68;
+  --gold: #c9893a;
+  --bg: #f8f5ef;
+  --panel: #1f2a3d;
+  --line: #e6e0d6;
+  --tag-bg: #efe6d6;
+  --tag-text: #7a4b1e;
 }
-
 @media (prefers-color-scheme: dark) {
   :root {
-    --text: #e8e8e8;
-    --muted: #a0a0a0;
-    --link: #6ea8ff;
-    --bg: #121212;
-    --panel: #1a1b1e;
-    --line: #2a2a2a;
-    --tag-bg: #1c2740;
-    --tag-text: #a9c4ff;
+    --text: #e8e9ee;
+    --muted: #a3a8b5;
+    --link: #9fb8e6;
+    --gold: #e0a457;
+    --bg: #12161f;
+    --panel: #18202f;
+    --line: #2a3142;
+    --tag-bg: #2a2418;
+    --tag-text: #ecc99a;
   }
 }
 
-/* ===== Base ===== */
-* { box-sizing: border-box; }
+body { background: var(--bg); }
 
-body {
-  margin: 0;
-  font-family: system-ui, sans-serif;
-  line-height: 1.6;
-  color: var(--text);
-  background: var(--bg);
-}
-
-a, a:visited { color: var(--link); text-decoration: none; }
-a:hover { text-decoration: underline; }
-
-h2 { margin-top: 0; padding-bottom: 4px; border-bottom: 1px solid var(--line); }
-h3 { margin: 0 0 4px; }
-section { margin-bottom: 48px; scroll-margin-top: 24px; }
-
-/* Small icon before a section heading. */
-.section-icon {
-  font-size: 0.8em;
-  margin-right: 10px;
-  color: var(--link);
-}
-
-/* ===== Layout: profile, content, changelog ===== */
-.layout {
-  display: grid;
-  grid-template-columns: minmax(300px, 22vw) minmax(0, 1fr) minmax(300px, 22vw);
-  min-height: 100vh;
-}
-
-/* ===== Left sidebar ===== */
+/* Sidebar: deep navy panel with light text. */
 .sidebar {
-  position: sticky;
-  top: 0;
-  height: 100vh;
-  padding: 48px 32px;
   background: var(--panel);
-  border-right: 1px solid var(--line);
-  text-align: center;
+  border-right: none;
+  color: #f4ece6;
 }
+.home-link, .home-link:visited, .sidebar h1 { color: #fbf4ee; }
+.tagline { color: rgba(251, 244, 238, 0.68); }
+.avatar { border: 3px solid rgba(201, 137, 58, 0.6); }
 
-/* Photo and name link back to the home view, without looking like a link. */
-.home-link,
-.home-link:visited {
-  display: block;
-  color: var(--text);
-}
-.home-link:hover { text-decoration: none; }
-.home-link:hover .avatar { opacity: 0.9; }
+.links a, .links a:visited { background: #fbf4ee; color: var(--panel); }
+.links a:hover { background: var(--gold); color: #2a1a10; opacity: 1; }
 
-.avatar {
-  width: 160px;
-  height: 160px;
-  border-radius: 50%;
-  object-fit: cover;
+.sections a, .sections a:visited {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.12);
+  color: #f4ece6;
 }
-
-.sidebar h1 { font-weight: 500; font-size: 26px; margin: 16px 0 4px; }
-.tagline { font-style: italic; color: var(--muted); margin-top: 0; }
-
-/* Round icon buttons: GitHub, LinkedIn, Scholar, Credly. */
-.links a,
-.links a:visited {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 42px;
-  height: 42px;
-  margin: 4px;
-  border-radius: 50%;
-  background: var(--text);
-  color: var(--bg);
-  font-size: 19px;
-}
-.links a:hover { opacity: 0.8; text-decoration: none; }
-
-/* Sidebar menu: card-like buttons with icon, label and arrow. */
-.sections {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  margin-top: 32px;
-  text-align: left;
-}
-.sections a,
-.sections a:visited {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 11px 14px;
-  border: 1px solid var(--line);
-  border-radius: 10px;
-  background: var(--bg);
-  color: var(--text);
-  font-weight: 500;
-  cursor: pointer;
-  transition: border-color 0.15s, background 0.15s, transform 0.15s;
-}
-.sections a i:first-child {
-  width: 18px;
-  text-align: center;
-  color: var(--link);
-}
-.sections a span { flex: 1; }
-.sections .arrow {
-  font-size: 12px;
-  color: var(--muted);
-  transition: transform 0.15s;
-}
+.sections a i:first-child { color: var(--gold); }
+.sections .arrow { color: rgba(244, 236, 230, 0.5); }
 .sections a:hover {
-  border-color: var(--link);
-  background: var(--bg);
-  text-decoration: none;
-  transform: translateX(2px);
+  background: rgba(255, 255, 255, 0.1);
+  border-color: var(--gold);
 }
-.sections a:hover .arrow { transform: translateX(3px); color: var(--link); }
-.sections a:focus-visible { outline: 2px solid var(--link); outline-offset: 2px; }
+.sections a:hover .arrow { color: var(--gold); }
 
-/* ===== One view at a time ===== */
-/* Home (summary, expertise, certifications) by default,
-   or the section picked in the sidebar menu. */
-.page { display: none; }
-.page:target { display: block; }
-main:has(.page:target) .home { display: none; }
-
-/* Active menu item: accent border and tinted background. */
+/* Active menu item: gold button with dark text, for good contrast. */
 .layout:has(#blog:target) .sections a[href="#blog"],
 .layout:has(#builds:target) .sections a[href="#builds"],
 .layout:has(#research:target) .sections a[href="#research"],
 .layout:not(:has(.page:target)) .sections .about-link {
-  border-color: var(--link);
-  background: var(--tag-bg);
-  color: var(--text);
+  background: var(--gold);
+  border-color: var(--gold);
+  color: #2a1a10;
 }
+.layout:has(#blog:target) .sections a[href="#blog"] i,
+.layout:has(#builds:target) .sections a[href="#builds"] i,
+.layout:has(#research:target) .sections a[href="#research"] i,
+.layout:not(:has(.page:target)) .sections .about-link i { color: #2a1a10; }
 
-/* ===== Middle content column ===== */
-/* The footer stays at the bottom of the screen, even when content is short. */
-main {
-  width: 100%;
-  max-width: 680px;
-  margin: 0 auto;
-  padding: 48px 32px;
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
-main footer {
-  margin-top: auto;
-  padding-top: 16px;
-  border-top: 1px solid var(--line);
-  color: var(--muted);
-  font-size: 14px;
-}
-main footer p { margin: 0; }
+/* Serif greeting. */
+.hello { font-family: Georgia, "Times New Roman", serif; font-weight: 500; }
 
-/* ===== Home: greeting and summary ===== */
-.hello {
-  font-size: 36px;
-  font-weight: 600;
-  line-height: 1.2;
-  margin: 0 0 16px;
-  padding: 0;
-  border-bottom: none;
-}
+/* Changelog dots in gold. */
+.updates li::before { background: var(--gold); }
 
-.summary p {
-  font-size: 18px;
-  line-height: 1.7;
-  margin: 0 0 16px;
-  text-align: justify;
-  hyphens: auto;
-}
-
-/* Tags: Expertise and project cards. */
-.tags span {
-  display: inline-block;
-  margin: 0 6px 6px 0;
-  padding: 2px 10px;
-  border-radius: 6px;
-  background: var(--tag-bg);
-  color: var(--tag-text);
-  font-size: 13px;
-}
-
-/* Certifications list. */
-.cert-list { list-style: none; margin: 0; padding: 0; }
-.cert-list li { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 14px; }
-.cert-list li > i { color: var(--link); font-size: 18px; margin-top: 3px; width: 18px; text-align: center; }
-.cert-name { display: block; font-weight: 500; }
-.cert-meta { display: block; font-size: 14px; color: var(--muted); }
-
-/* ===== Intro lines (Blog and Research) ===== */
-/* Serif italic with a soft blue-to-violet gradient. */
-.lead { color: var(--muted); margin-top: 0; }
-
+/* Blog and Research intro lines: navy-to-gold gradient. */
 #blog .lead, #research .lead {
-  font-family: Georgia, "Times New Roman", serif;
-  font-style: italic;
-  font-size: 18px;
-  line-height: 1.4;
-  margin: 4px 0 20px;
-  text-wrap: balance;
-  color: var(--link);
-  background: linear-gradient(90deg, #2563eb, #7c3aed);
+  background: linear-gradient(90deg, #1f3a68, #b8772a);
   -webkit-background-clip: text;
   background-clip: text;
-  -webkit-text-fill-color: transparent;
 }
 @media (prefers-color-scheme: dark) {
   #blog .lead, #research .lead {
-    background: linear-gradient(90deg, #6ea8ff, #b69cff);
+    background: linear-gradient(90deg, #9fb8e6, #e0a457);
     -webkit-background-clip: text;
     background-clip: text;
   }
 }
-/* Research line on a single row on wide screens, where it fits. */
-@media (min-width: 1280px) {
-  #research .lead { white-space: nowrap; }
-}
 
-/* ===== Blog ===== */
-.empty {
-  padding: 14px 18px;
-  border: 1px dashed var(--line);
-  border-radius: 10px;
-  color: var(--muted);
-}
-
-/* ===== Builds: project cards ===== */
-.card {
-  padding: 18px 20px;
-  border: 1px solid var(--line);
-  border-radius: 12px;
-  transition: border-color 0.15s;
-}
-.card + .card { margin-top: 16px; }
-.card:hover { border-color: var(--link); }
-.card p { margin: 0 0 12px; }
-
-.more { margin-top: 20px; font-size: 15px; color: var(--muted); }
-.more i { font-size: 12px; margin-left: 4px; }
-
-/* ===== Research: publication cards ===== */
-.papers { display: flex; flex-direction: column; gap: 16px; }
-.paper {
-  display: flex;
-  gap: 18px;
-  padding: 18px 20px;
-  border: 1px solid var(--line);
-  border-radius: 12px;
-  transition: border-color 0.15s, transform 0.15s;
-}
-.paper:hover { border-color: var(--link); transform: translateY(-1px); }
-.paper-year {
-  flex: 0 0 auto;
-  font-size: 15px;
-  font-weight: 600;
-  color: var(--link);
-  padding-top: 2px;
-  min-width: 42px;
-}
-.paper-body { min-width: 0; }
-.paper h3 { font-size: 17px; line-height: 1.4; margin: 0 0 6px; }
-.paper .authors { margin: 0; font-size: 14px; color: var(--muted); }
-.paper .authors strong { color: var(--text); font-weight: 600; }
-.paper .venue { margin: 2px 0 12px; font-size: 14px; font-style: italic; color: var(--muted); }
-
-/* Badges: field (blue), publisher (pink), open access (green). */
-.paper-badges { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 8px; }
-.badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 12px;
-  padding: 2px 9px;
-  border-radius: 999px;
-  border: 1px solid var(--line);
-  color: var(--muted);
-}
-.badge.field { background: var(--tag-bg); color: var(--tag-text); border-color: transparent; }
-.badge.pub {
-  font-weight: 600;
-  border-color: transparent;
-  background: #fbeaf0;
-  color: #993556;
-}
-.badge.pub i { font-size: 11px; }
-.badge.oa { color: #15803d; border-color: #86efac; }
-@media (prefers-color-scheme: dark) {
-  .badge.pub { background: #4b1528; color: #f4c0d1; }
-}
-
-/* Buttons: View paper, Code. */
-.paper-links { display: flex; gap: 8px; flex-wrap: wrap; }
-.btn, .btn:visited {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 5px 12px;
-  font-size: 13px;
-  font-weight: 500;
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  color: var(--text);
-}
-.btn i { color: var(--link); }
-.btn:hover { border-color: var(--link); text-decoration: none; }
-
-/* ===== Right sidebar: changelog ===== */
-.updates {
-  position: sticky;
-  top: 0;
-  height: 100vh;
-  overflow-y: auto;
-  padding: 48px 36px;
-  border-left: 1px solid var(--line);
-}
-.updates h2 { font-size: 18px; }
-.updates ul { list-style: none; margin: 0; padding: 0; }
-.updates li {
-  position: relative;
-  padding: 0 0 20px 18px;
-  border-left: 2px solid var(--line);
-}
-.updates li::before {
-  content: "";
-  position: absolute;
-  left: -6px;
-  top: 6px;
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: var(--link);
-}
-.updates time { font-size: 13px; color: var(--muted); }
-.updates p { margin: 2px 0 0; font-size: 15px; }
-
-/* ===== Medium screens: changelog moves below the content ===== */
-@media (max-width: 1200px) {
-  .layout { grid-template-columns: 300px minmax(0, 1fr); }
-  .updates {
-    grid-column: 2;
-    position: static;
-    height: auto;
-    border-left: none;
-    padding: 0 32px 48px;
-    max-width: 680px;
-    width: 100%;
-    margin: 0 auto;
-  }
-}
-
-/* ===== Phones: everything in one column ===== */
+/* Phones: sidebar keeps the navy look. */
 @media (max-width: 760px) {
-  .layout { grid-template-columns: 1fr; }
-  .sidebar {
-    position: static;
-    height: auto;
-    border-right: none;
-    border-bottom: 1px solid var(--line);
-  }
-  /* Menu becomes a row of compact tabs, without arrows. */
-  .sections {
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin-top: 20px;
-  }
-  .sections a { padding: 8px 12px; gap: 8px; }
-  .sections .arrow { display: none; }
-  main { padding: 32px 16px; }
-  .updates { grid-column: 1; padding: 0 16px 32px; }
-  .paper { flex-direction: column; gap: 6px; }
+  .sidebar { border-bottom: none; }
 }
