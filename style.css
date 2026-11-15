@@ -240,9 +240,7 @@ main footer p { margin: 0; }
   }
 }
 /* Research line on a single row on wide screens, where it fits. */
-@media (min-width: 1280px) {
-  #research .lead { white-space: nowrap; }
-}
+
 
 /* ===== Blog ===== */
 .empty {
@@ -492,7 +490,7 @@ body { background: var(--bg); }
   .sidebar { border-bottom: none; }
 }
 /* Blog lead: bigger and bolder, with a gold accent bar. */
-#blog .lead {
+#blog .lead, #research .lead {
   font-size: 24px;
   font-weight: 600;
   padding: 6px 0 6px 16px;
