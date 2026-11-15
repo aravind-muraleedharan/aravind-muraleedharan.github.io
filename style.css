@@ -39,7 +39,7 @@ a:hover { text-decoration: underline; }
 
 h2 { margin-top: 0; padding-bottom: 4px; border-bottom: 1px solid var(--line); }
 h3 { margin: 0 0 4px; }
-section { margin-bottom: 48px; scroll-margin-top: 24px; }
+section { margin-bottom: 28px; scroll-margin-top: 24px; }
 
 /* Small icon before a section heading. */
 .section-icon {
@@ -491,3 +491,13 @@ body { background: var(--bg); }
 @media (max-width: 760px) {
   .sidebar { border-bottom: none; }
 }
+/* Blog lead: bigger and bolder, with a gold accent bar. */
+#blog .lead {
+  font-size: 24px;
+  font-weight: 600;
+  padding: 6px 0 6px 16px;
+  border-left: 4px solid var(--gold);
+  margin: 8px 0 24px;
+}
+/* Keep the emoji in full colour, outside the gradient. */
+.lead-emoji { -webkit-text-fill-color: initial; font-style: normal; }
