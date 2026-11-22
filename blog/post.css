@@ -131,3 +131,23 @@
 /* Rules table: plain example column, bold result column. */
 .swaps.rules td:nth-child(2) { color: var(--text); font-weight: 400; }
 .swaps.rules td:last-child { color: var(--link); font-weight: 600; }
+
+/* Screenshot gallery: swipe on phones, scroll sideways on laptops. */
+.gallery {
+  display: flex; gap: 14px;
+  overflow-x: auto; scroll-snap-type: x mandatory;
+  padding: 4px 2px 12px; margin: 6px 0 4px;
+  scrollbar-width: thin; scrollbar-color: var(--gold) transparent;
+}
+.gallery .slide {
+  flex: 0 0 82%; margin: 0; scroll-snap-align: start;
+}
+.gallery img {
+  display: block; width: 100%; height: auto;
+  border-radius: 14px; border: 1px solid var(--line);
+  box-shadow: 0 6px 20px rgba(31, 42, 61, 0.10);
+}
+.gallery figcaption { font-size: 14px; color: var(--muted); margin-top: 8px; }
+.gallery figcaption span { font-weight: 700; color: var(--gold); margin-right: 4px; }
+.gallery-note { font-size: 14px; color: var(--muted); margin-bottom: 8px !important; }
+@media (min-width: 760px) { .gallery .slide { flex-basis: 62%; } }
