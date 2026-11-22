@@ -107,3 +107,27 @@
 @media (prefers-color-scheme: dark) {
   .post p.highlight { background: rgba(159, 184, 230, 0.1); }
 }
+
+/* Code: inline and blocks. */
+.post code {
+  font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  font-size: 0.88em;
+  background: var(--tag-bg);
+  color: var(--tag-text);
+  padding: 1px 6px;
+  border-radius: 5px;
+}
+.post pre {
+  background: var(--panel);
+  color: #f4ece6;
+  border-radius: 12px;
+  padding: 18px 22px;
+  margin: 0 0 20px;
+  overflow-x: auto;
+  line-height: 1.6;
+}
+.post pre code { background: none; color: inherit; padding: 0; font-size: 15px; }
+
+/* Rules table: plain example column, bold result column. */
+.swaps.rules td:nth-child(2) { color: var(--text); font-weight: 400; }
+.swaps.rules td:last-child { color: var(--link); font-weight: 600; }

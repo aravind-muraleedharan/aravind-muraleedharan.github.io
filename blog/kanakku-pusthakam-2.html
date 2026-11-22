@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kanakku Pusthakam 2.0: an account book that never leaves your computer · AravI</title>
+  <meta name="description" content="A private, offline personal account book for Indian households. Version 2.0 redesigns every page, and counts every rupee once and in the right place.">
+  <link rel="canonical" href="https://aravi.dev/blog/kanakku-pusthakam-2.html">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="AravI">
+  <meta property="og:title" content="Kanakku Pusthakam 2.0: an account book that never leaves your computer">
+  <meta property="og:description" content="A private, offline personal account book for Indian households. Version 2.0 redesigns every page.">
+  <meta property="og:url" content="https://aravi.dev/blog/kanakku-pusthakam-2.html">
+  <meta property="og:image" content="https://aravi.dev/blog/kanakku-pusthakam-2.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="author" content="Aravind M">
+  <link rel="icon" href="../favicon.svg?v=4" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png?v=3">
+  <link rel="stylesheet" href="../style.css?v=29">
+  <link rel="stylesheet" href="post.css?v=3">
+</head>
+<body>
+  <article class="post">
+    <a class="back" href="../#blog">← All posts</a>
+
+    <header>
+      <p class="post-kicker">Builds · Privacy</p>
+      <h1>Kanakku Pusthakam 2.0: an account book that never leaves your computer 📒</h1>
+      <p class="post-sub">Where does my money actually go? An honest answer, without handing my finances to the cloud.</p>
+      <p class="post-meta">Aravind M · <time datetime="2026-11-22">22 Nov 2026</time> · 6 min read</p>
+    </header>
+
+    <aside class="tldr">
+      <p class="tldr-title">In 3 lines</p>
+      <ul>
+        <li>A personal account book that runs only on your computer: no cloud, no account, works offline.</li>
+        <li>It counts money the way it really moves: card bills are transfers, investing isn’t spending, and only a loan’s interest is a cost.</li>
+        <li>Version 2.0 redesigns every page, with clearer reports, Excel exports and plain-language labels.</li>
+      </ul>
+    </aside>
+
+    <h2>Where does my money actually go?</h2>
+    <p>
+      I built Kanakku Pusthakam because I wanted an honest answer to that question without handing my
+      salary, bank balances and loans to an app in the cloud. Today I’m releasing version 2.0, a
+      redesign of every page.
+    </p>
+    <p>
+      Kanakku Pusthakam (<span lang="ml">കണക്കു പുസ്തകം</span>) is Malayalam for “account book”. That’s
+      exactly what it is: a personal account book for income, expenses, credit cards, investments,
+      loans and a monthly budget.
+    </p>
+    <p>The apps I tried had the same three problems:</p>
+    <ul>
+      <li><strong>They want your data.</strong> An account, a cloud sync, sometimes your bank login. My finances are the most private numbers I have.</li>
+      <li><strong>They count money wrong.</strong> Many add a card swipe as an expense and then the card bill payment as another, so the same dinner shows up twice. Or they treat money I put into an RD as “spent”.</li>
+      <li><strong>They don’t speak Indian finance.</strong> PPF, chit funds, gold savings schemes, the April–March financial year: usually missing or bolted on.</li>
+    </ul>
+    <p>So I wrote my own, for the way money actually moves in an Indian household.</p>
+
+    <h2>Your data never leaves your computer 🔐</h2>
+    <p>
+      Kanakku Pusthakam runs only on your own machine. There is no cloud, no account with any company
+      and no tracking, and it works with the internet switched off.
+    </p>
+    <ul>
+      <li><strong>One file.</strong> Everything lives in a single SQLite database on your disk. You can copy it, back it up or delete it like any other file.</li>
+      <li><strong>Only this computer can reach it.</strong> The app answers only on 127.0.0.1, so other devices on your network can’t open it, and it refuses requests that try to sneak in through your browser.</li>
+      <li><strong>A real login.</strong> A password plus a 6-digit code from an authenticator app (Google or Microsoft Authenticator, Authy). It logs you out after the minutes of inactivity you choose.</li>
+      <li><strong>Backups you control.</strong> One a day at your first login (only if something changed), plus a backup to any folder or pen drive whenever you want.</li>
+      <li><strong>No internet, ever.</strong> Even the libraries it needs are bundled inside the app. A separate <code>update.sh</code> refreshes them when you choose to, and checks the app still works before using them.</li>
+    </ul>
+    <p class="aside-note">
+      The trade-off is honest: the database isn’t encrypted, so protect your computer account with a
+      password and use disk encryption if you can.
+    </p>
+
+    <h2>Counting money the way it really moves 💸</h2>
+    <p>
+      The heart of the app is a few simple rules, so every rupee is counted once and in the right place.
+    </p>
+
+    <div class="table-wrap">
+      <table class="swaps rules">
+        <thead>
+          <tr><th>Entry</th><th>Example</th><th>Counts as</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Expense</td><td>₹450 dinner paid with a credit card</td><td>Expense, on the day you pay</td></tr>
+          <tr><td>Transfer</td><td>Paying the credit card bill; an ATM withdrawal</td><td>Neither, so nothing is counted twice</td></tr>
+          <tr><td>Invest</td><td>₹5,000 RD instalment</td><td>Invested, not spent</td></tr>
+          <tr><td>Maturity</td><td>RD returns ₹63,200 for ₹60,000 put in</td><td>Only the ₹3,200 gain is income</td></tr>
+          <tr><td>Loan EMI</td><td>₹10,030 EMI: ₹7,900 principal + ₹2,130 interest</td><td>Only the interest is an expense</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <ul>
+      <li><strong>The card swipe is the expense.</strong> When you pay the card bill, that’s a transfer from your bank to your card, so the dinner isn’t counted a second time.</li>
+      <li><strong>Investing isn’t spending.</strong> Money moved into an FD, RD, PPF, stocks, gold or a chit fund stays yours. Only the gain or loss when it comes back counts as income. A chit fund settles its gain or loss when you close it.</li>
+      <li><strong>A loan’s principal isn’t an expense.</strong> You already spent that money when you borrowed it. The interest is the real cost, so only the interest part of each EMI counts. A credit card EMI is different: there, the whole EMI is your purchase being paid off.</li>
+    </ul>
+
+    <h2>What’s new in 2.0 ✨</h2>
+    <p>
+      Version 2.0 reworks every page around one idea: <strong>show the answer first, in plain words</strong>,
+      with a short ⓘ note wherever a term needs explaining.
+    </p>
+    <ul>
+      <li><strong>Reports, rebuilt.</strong> A Summary tab with totals, an income vs expense chart and the month-by-month table, and a Categories tab with a share strip of every category. Each total shows ▲ or ▼ against the same stretch of time just before, so “this month” is compared with the same days of last month.</li>
+      <li><strong>Excel exports with charts.</strong> Reports downloads a styled workbook with real Excel charts, and the Monthly Budget exports a matching sheet. Both are built by the app itself, offline.</li>
+      <li><strong>A spending panel on Transactions.</strong> Earned or Spent, by category, for any month or date range, with filters and pages of 50.</li>
+      <li><strong>Your own types.</strong> Add loan types (“Gold loan” that works like a loan) and investment types (“Mutual funds” that work like stocks), with the maths of the type you pick.</li>
+      <li><strong>Clearer investments and loans.</strong> Invested, gain and current value at a glance; loans show what’s left to repay, this month’s EMIs and the interest still to come.</li>
+      <li><strong>Settings, Backups, Security and About redesigned.</strong> Lists you rename in place, daily automatic backups, a password strength meter, and an About page that says plainly where your data lives.</li>
+      <li><strong>Auto-logout that counts real activity.</strong> Reading or typing keeps you logged in; walking away logs you out on its own.</li>
+    </ul>
+    <p>
+      The full list is in the
+      <a href="https://github.com/aravind-muraleedharan/kanakku-pusthakam" target="_blank" rel="noopener noreferrer">changelog on GitHub</a>.
+    </p>
+
+    <h2>What building it taught me 🧠</h2>
+    <ol>
+      <li><strong>Get the money rules right before the screens.</strong> Every report is only as good as how an entry is counted. Deciding that a card bill is a transfer, not an expense, fixed more confusing numbers than any chart.</li>
+      <li><strong>Plain words beat finance words.</strong> “Principal” became “Invested”, “cumulative net” became “Running net”, and a label like “800% more spent than earned” became “Spent ₹1,51,239 more than earned”. If a number needs a sentence to explain, it goes in an ⓘ, not on the screen.</li>
+      <li><strong>Offline is a design choice, not a missing feature.</strong> It meant bundling every library, writing the Excel files without an Excel library, and keeping updates as a separate, optional step.</li>
+      <li><strong>Real life is messier than the textbook.</strong> A chit fund pays its “kuri” before you’ve finished paying in; an FD can pay interest out or keep it inside; a loan was already running when you started tracking it. Each of those needed its own small rule.</li>
+      <li><strong>Test on the oldest version you support.</strong> One line of the Excel export only worked on Python 3.12, so the app wouldn’t start on 3.10. The tests now run on 3.10 to 3.13 for every change.</li>
+    </ol>
+
+    <h2>Try it 🚀</h2>
+    <p>
+      Kanakku Pusthakam is free and open source under the MIT licence. It runs on Linux today; all you
+      need is Python 3.10 or newer, and there’s nothing to install.
+    </p>
+<pre><code>git clone https://github.com/aravind-muraleedharan/kanakku-pusthakam.git
+cd kanakku-pusthakam
+./start.sh</code></pre>
+    <p>
+      Your browser opens the app; create your login, scan the QR code with an authenticator app, and
+      enter your starting balances. Want to look around first? <code>python3 run.py --demo --open</code>
+      starts it with a year of sample data, kept separate from your own.
+    </p>
+    <p>
+      <strong>Next on the list:</strong> recurring entries, bank statement import, and Windows and macOS support.
+    </p>
+
+    <p class="post-end">
+      If you try it, I’d love to hear what works for you and what you’d want next.
+      <a href="https://github.com/aravind-muraleedharan/kanakku-pusthakam/issues" target="_blank" rel="noopener noreferrer">Open an issue on GitHub</a>
+      or message me on
+      <a href="https://www.linkedin.com/in/aravindm1991/" target="_blank" rel="noopener noreferrer">LinkedIn</a> ☕
+    </p>
+
+    <footer class="post-foot">
+      <a href="../#blog">← All posts</a>
+      <span>© 2026 Aravind M</span>
+    </footer>
+  </article>
+</body>
+</html>
